@@ -34,3 +34,11 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+UYuu2f1
+Ознайомитись з апі http://owu.linkpc.net/carsAPI/v1/doc  уважно. (запасна урла http://185.69.152.209/carsAPI/v1/doc на випадок,
+якщо попередня не буде працювати)
+Створити сторінку, на якій виводити всі автівки (з мінімальною інформацією)
+Створити сторінку з формою для створення об'єктів car. Створити сервіси для роботи з апі
+В даному завданні ви НЕ зможете використовувати server actions для запису в бд. 
+Але зможете використовувати їх, щоб робити запити на апі від сторони сервера
