@@ -1,7 +1,6 @@
 import type {Metadata} from "next";
 import {Geist, Geist_Mono} from "next/font/google";
 import "./globals.css";
-import {Menu} from "@/components/menu/Menu";
 import React from "react";
 import styles from "@/app/page.module.css";
 
@@ -29,7 +28,6 @@ export default function RootLayout({
         <html lang="en">
         <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <div className={styles.page}>
-        <Menu/>
         {children}
         </div>
         </body>
