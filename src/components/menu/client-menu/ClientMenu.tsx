@@ -12,32 +12,35 @@ interface Props {
 const ClientMenu = ({userWithToken}: Props) => {
 
     const location = usePathname();
-    const isActive = (path: string) => location === path;
+    const isActive = (path: string) => location.startsWith(path);
 
     return (
         <>
             {userWithToken ? (
                 <>
-                    <img src={userWithToken.image} alt="userPhoto"/>
-                    <ul className={classNames('navigate')}>
-                        <li className={classNames('pages')}>
+                    {userWithToken.image && (
+                        <img src={userWithToken.image} alt="User profile" loading="lazy"/>
+                    )}
+
+                    <ul className='navigate'>
+                        {[
+                            {path: "/", label: "Main"},
+                            {path: "/users", label: "Users"},
+                            {path: "/recipes", label: "Recipes"}
+                        ].map(({path, label}) => (
+                            <li key={path} className={classNames("pages", {active: isActive(path)})}>
+                                <Link href={path}>{label}</Link>
+                            </li>
+                        ))}
+                        <li className="pages">
                             <LogOutButton/>
-                        </li>
-                        <li className={classNames('pages', {'active': isActive('/')})}>
-                            <Link href={'/'}>Main</Link>
-                        </li>
-                        <li className={classNames('pages', {'active': isActive('/users')})}>
-                            <Link href={'/users'}>Users</Link>
-                        </li>
-                        <li className={classNames('pages', {'active': isActive('/recipes')})}>
-                            <Link href={'/recipes'}>Recipes</Link>
                         </li>
                     </ul>
                 </>
             ) : (
-              <li className={classNames('pages',{'active': isActive('/login')})}>
-                  <Link href={'/login'}>Login</Link>
-              </li>
+                <li className={classNames('pages', {'active': isActive('/login')})}>
+                    <Link href={'/login'}>Login</Link>
+                </li>
             )}
         </>
     );

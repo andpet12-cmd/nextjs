@@ -1,7 +1,8 @@
+'use client';
 import {schema} from "@/validator/login.validator";
 import {LoginData} from "@/components/form/FormLogin";
 import {cookies} from "next/headers";
-import {deleteCookie, setCookie} from "cookies-next";
+import {deleteCookie, setCookie} from "cookies-next/server";
 import {FormLoginData, login} from "@/api/api.service";
 
 export const loginAction = async (formData: LoginData) => {

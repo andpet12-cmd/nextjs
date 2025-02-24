@@ -1,6 +1,7 @@
+"use client";
 import classNames from "classnames";
-import {FC} from "react";
-import {useRouter} from "next/router";
+import { FC } from "react";
+import { useRouter } from "next/navigation";
 
 interface PaginationProps {
     totalItems: number;
@@ -10,43 +11,49 @@ interface PaginationProps {
     tag?: string;
 }
 
-export const Pagination: FC<PaginationProps> = ({totalItems, itemsPerPage, currentPage, type, tag}) => {
+export const Pagination: FC<PaginationProps> = ({ totalItems, itemsPerPage, currentPage, type, tag }) => {
+    const router = useRouter();
+    const totalPages = Math.ceil(totalItems / itemsPerPage);
 
-        const router = useRouter();
-        const totalPages = Math.ceil(totalItems / itemsPerPage);
-
-        const handlePageChange = (newPage: number) => {
-            if (newPage > 0 && newPage <= totalPages) {
-                if (type === 'users') {
-                    router.push(`/users?page=${newPage}`);
-                } else {
-                    if (tag && type) {
-                        router.push(`/recipes/tag=${tag}?page=${newPage}`);
-                    } else {
-                        router.push(`/recipes?page=${newPage}`);
-                    }
-
-                }
-            }
+    const handlePageChange = (newPage: number) => {
+        if (newPage > 0 && newPage <= totalPages) {
+            const basePath = type === "users" ? "/users" : "/recipes";
+            const query = tag ? `/tag=${tag}?page=${newPage}` : `?page=${newPage}`;
+            router.push(`${basePath}${query}`);
         }
+    };
 
-        return (
-            <div className={classNames('pagination-wrapper')}>
-                <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
-                    Previous
-                </button>
-                {Array.from({length: totalPages}, (_, index) => (
-                    <button className={classNames('number-page')}
-                            key={index}
-                            onClick={() => handlePageChange(index + 1)}
-                            disabled={currentPage === index + 1}
+    return (
+        <div className="pagination-wrapper">
+            <button
+                className={classNames("pagination-btn", { disabled: currentPage === 1 })}
+                onClick={() => handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+            >
+                Previous
+            </button>
+
+            {Array.from({ length: totalPages }, (_, index) => {
+                const pageNumber = index + 1;
+                return (
+                    <button
+                        className={classNames("number-page", { active: currentPage === pageNumber })}
+                        key={pageNumber}
+                        onClick={() => handlePageChange(pageNumber)}
+                        disabled={currentPage === pageNumber}
                     >
-                        {index + 1}
+                        {pageNumber}
                     </button>
-                ))}
-                <button onClick={() => handlePageChange(currentPage + 1)} disabled={currentPage === totalPages}>
-                    Next
-                </button>
-            </div>
-        );
-    }
+                );
+            })}
+
+            <button
+                className={classNames("pagination-btn", { disabled: currentPage === totalPages })}
+                onClick={() => handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+            >
+                Next
+            </button>
+        </div>
+    );
+};

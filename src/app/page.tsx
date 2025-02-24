@@ -1,9 +1,10 @@
 import {MainPage} from "@/components/main-page/MainPage";
 
-export default function HomePage() {
+const HomePage = ()=> {
     return (
         <div>
             <MainPage/>
         </div>
     );
 }
+export default HomePage;

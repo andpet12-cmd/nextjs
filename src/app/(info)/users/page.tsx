@@ -1,6 +1,7 @@
 import {UsersList} from "@/components/users/users-list/UsersList";
 
-const UsersListPage = async () => {
+const UsersListPage = () => {
+
     return (
         <div>
             <UsersList/>

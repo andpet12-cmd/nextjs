@@ -2,6 +2,7 @@ import {getCookie} from "cookies-next/server";
 import {cookies} from "next/headers";
 import {IUserInfoWithTokens} from "@/models/IUserInfoWithToken";
 import classNames from "classnames";
+import "./MainPage.css"
 
 export const MainPage = async () => {
 

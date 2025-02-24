@@ -1,3 +1,4 @@
+'use client';
 import {useSearchParams} from "next/navigation";
 import {useEffect, useState} from "react";
 import {IResponse} from "@/models/IResponse";

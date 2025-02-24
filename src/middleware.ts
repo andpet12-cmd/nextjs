@@ -1,6 +1,6 @@
 import {NextRequest, NextResponse} from "next/server";
 
-export async function middleware(req: NextRequest) {
+export function middleware(req: NextRequest) {
     const url = req.nextUrl.clone();
     const pathName = url.pathname;
 

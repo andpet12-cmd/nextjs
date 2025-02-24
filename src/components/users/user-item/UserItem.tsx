@@ -19,7 +19,7 @@ export const UserItem: FC<Props> = ({item}) => {
             <h2>{item.firstName}{item.lastName}</h2>
             <h3>Age: {item.age}</h3>
             <p>User id: {item.id}</p>
-            <p className={classNames('arabic')}>Email: {item.email}</p>
+            <p className={classNames('latin')}>Email: {item.email}</p>
             <button onClick={userDetails}>Details</button>
         </div>
     );

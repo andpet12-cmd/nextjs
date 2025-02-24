@@ -16,7 +16,7 @@ a {
   color: inherit;
 }
 
-ul, li {
+ul, ol {
   list-style: none;
 }
 
@@ -27,7 +27,7 @@ button {
 }
 
 body {
-  background-image: url("public/bg/background.jpg");
+  background-image: url('/public/bg/background.jpg');
   background-repeat: no-repeat;
   background-size: cover;
   height: 100vh;

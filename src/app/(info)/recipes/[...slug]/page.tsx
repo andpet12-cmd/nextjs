@@ -1,57 +1,42 @@
-import {Metadata} from "next";
-import {FilterByTag} from "@/components/recipes/recipe-filter/FilterByTag";
-import {RecipeDetails} from "@/components/recipes/recipe-details/RecipeDetails";
+import { Metadata } from "next";
+import { FilterByTag } from "@/components/recipes/recipe-filter/FilterByTag";
+import { RecipeDetails } from "@/components/recipes/recipe-details/RecipeDetails";
 
 type Props = {
     params: { slug?: string[] };
 };
 
+export const generateMetadata = ({ params }: Props): Metadata => {
+    const slug = params.slug;
 
-export const generateMetadata = async ({params}: Props): Promise<Metadata> => {
-
-    const slug = (await params).slug
-
-    if (slug && slug[0].includes('tag')) {
-
+    if (slug?.[0]?.includes("tag")) {
         return {
-            title: "FilterByTagPage metadata",
-            description: "You can check recipes by tag",
-        }
-
-    } else if (slug && slug[0].includes('id')) {
-
+            title: "Filter by Tag",
+            description: "Browse recipes by selected tag.",
+        };
+    } else if (slug?.[0]?.includes("id")) {
         return {
-            title: "DetailsUserById metadata",
-            description: "User details chosen by id",
-        }
-
-    } else {
-        return {
-            title: "SomeError metadata",
-            description: "",
-        }
-    }
-}
-
-const SlugPage = async ({params}: Props) => {
-
-    const slug = (await params).slug
-
-
-    if (slug && slug[0].includes('tag')) {
-        return (
-            <div>
-                <FilterByTag/>.
-            </div>
-        );
-    } else if (slug && slug[0].includes('id')) {
-        return (
-            <div>
-                <RecipeDetails/>
-            </div>
-        )
+            title: "Recipe Details",
+            description: "Detailed view of a selected recipe.",
+        };
     }
 
+    return {
+        title: "Not Found",
+        description: "The requested page could not be found.",
+    };
+};
+
+const SlugPage = ({ params }: Props) => {
+    const slug = params.slug;
+
+    if (slug?.[0]?.includes("tag")) {
+        return <FilterByTag />;
+    } else if (slug?.[0]?.includes("id")) {
+        return <RecipeDetails />;
+    }
+
+    return <p>Page not found</p>;
 };
 
 export default SlugPage;
